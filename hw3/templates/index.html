@@ -1,0 +1,31 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>🎬 Movie Reviews</h1>
+  <a href="{{ url_for('create_review') }}">+ Add New Review</a>
+  <table>
+    <tr>
+      <th>Title</th>
+      <th>Rating</th>
+      <th>Actions</th>
+    </tr>
+    {% for review in reviews %}
+    <tr>
+      <td> <a href="/reviews/{{ review.id }}">{{ review.title }}</a></td>
+      <td>
+        {% for _ in range(review.rating) %}
+          ⭐
+        {% endfor %}
+      </td>
+      <td>
+       
+        <a href="{{ url_for('edit_review', review_id=review.id) }}">Edit</a>
+        <a href="/reviews/{{ review.id }}/delete">Delete</a>
+       
+
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+{% endblock %}

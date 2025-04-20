@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Integer, String
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
@@ -10,7 +10,7 @@ app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///thereviews.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
-# Initialize SQLAlchemy with Declarative Base
+# Initialize SQLAlchemy with Declarativsource
 class Base(DeclarativeBase):
     pass
 
@@ -90,9 +90,46 @@ def reset_db():
 
 @app.route('/')
 def show_all_reviews():
-    return 'Welcome to Movie Theater reviews!'
+    reviews = db_manager.get()
+    return render_template('index.html', reviews=reviews)
 
+@app.route('/reviews/<int:review_id>')
+def review_detail(review_id):
+    review = db_manager.get(review_id)
+    if review:
+        return render_template('review_detail.html', review=review)
+    return "Review not found", 404
+
+@app.route('/create', methods=['GET', 'POST'])
+def create_review():
+    if request.method == 'POST':
+        title = request.form['title']
+        text = request.form['text']
+        rating = int(request.form['rating'])
+
+        db_manager.create(title, text, rating)
+        return redirect(url_for('show_all_reviews'))
+
+    return render_template('review_form.html', action="Create", review=None)
   
+@app.route('/edit/<int:review_id>', methods=['GET', 'POST'])
+def edit_review(review_id):
+    review = db_manager.get(review_id)
+
+    if not review:
+        return "Review not found", 404
+
+    if request.method == 'POST':
+        title = request.form['title']
+        text = request.form['text']
+        rating = int(request.form['rating'])
+
+        db_manager.update(review_id, title, text, rating)
+        return redirect(url_for('show_all_reviews'))
+
+    return render_template('review_form.html', action="Edit", review=review)
+
+
 # RUN THE FLASK APP
 if __name__ == "__main__":
     with app.app_context():
