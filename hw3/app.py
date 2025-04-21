@@ -129,6 +129,11 @@ def edit_review(review_id):
 
     return render_template('review_form.html', action="Edit", review=review)
 
+@app.route('/delete/<int:review_id>', methods=['POST'])
+def delete_review(review_id):
+    db_manager.delete(review_id)
+    return redirect(url_for('show_all_reviews'))
+
 
 # RUN THE FLASK APP
 if __name__ == "__main__":
