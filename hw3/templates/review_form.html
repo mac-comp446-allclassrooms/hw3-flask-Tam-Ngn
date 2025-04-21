@@ -1,0 +1,21 @@
+<!-- templates/review_form.html -->
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>{{ action }} Review</h1>
+
+  <form method="POST">
+    <label>Title:</label><br>
+    <input type="text" name="title" value="{{ review.title if review else '' }}"><br><br>
+
+    <label>Review:</label><br>
+    <textarea name="text">{{ review.text if review else '' }}</textarea><br><br>
+
+    <label>Rating (1–5):</label><br>
+    <input type="number" name="rating" min="1" max="5" value="{{ review.rating if review else 1 }}"><br><br>
+
+    <button type="submit">{{ action }}</button>
+  </form>
+
+  <a href="/">← Back to all reviews</a>
+{% endblock %}

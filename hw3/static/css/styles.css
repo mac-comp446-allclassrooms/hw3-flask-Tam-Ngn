@@ -1,0 +1,84 @@
+/* static/style.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@1,600&display=swap');
+
+body {
+    background: url('/static/bg-folklore.jpg') no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Crimson Text', serif;
+    color: #2e2e2e;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    background-color: rgba(255, 255, 255, 0.85);
+    padding: 2rem;
+    margin: 2rem auto;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 800px;
+    box-shadow: 0 0 30px rgba(50, 50, 50, 0.25);
+    border: 1px solid #d3cfcf;
+}
+
+h1, h2 {
+    text-align: center;
+    color: #4d4d4d;
+    text-shadow: 1px 1px 2px #ffffff;
+    font-style: italic;
+}
+
+a, button {
+    color: #fff;
+    background-color: #5a5a5a;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    border: none;
+    margin: 0.3rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+button:hover, a:hover {
+    background-color: #383838;
+}
+
+form input, form textarea {
+    width: 100%;
+    padding: 0.6rem;
+    margin-top: 0.4rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    border: 1px solid #999;
+    font-size: 1rem;
+    background-color: #f6f6f6;
+    font-family: 'Crimson Text', serif;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    font-size: 1.1rem;
+}
+
+th, td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #cfcfcf;
+    color: #333;
+}
+
+th {
+    color: #555;
+    font-weight: bold;
+}
+
+.review-stars {
+    font-size: 1.3rem;
+    color: #c49c94; /* soft rose gold-ish vibe */
+    font-style: italic;
+}

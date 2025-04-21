@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>{{ review.title }}</h1>
+
+  <p>
+    <strong>Rating:</strong>
+    {% for _ in range(review.rating) %}
+      ⭐
+    {% endfor %}
+  </p>
+
+  <p><strong>Review:</strong> {{ review.text }}</p>
+
+  <a href="/">← Back to all reviews</a>
+{% endblock %}
